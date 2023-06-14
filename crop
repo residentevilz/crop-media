@@ -1,0 +1,27 @@
+from PIL import Image
+import requests
+from io import BytesIO
+
+def crop_image(url, left, top, right, bottom):
+    # Download the image from URL
+    response = requests.get(url)
+    image = Image.open(BytesIO(response.content))
+
+    # Crop the image
+    cropped_image = image.crop((left, top, right, bottom))
+
+    # Save the cropped image to a file (optional)
+    cropped_image.save("cropped_image.jpg")
+
+    # Upload the cropped image to WordPress media library (example code)
+    # Replace with your own code to upload the image to WordPress
+
+    # Return the cropped image object
+    return cropped_image
+
+# Example usage
+image_url = "https://example.com/image.jpg"
+cropped_image = crop_image(image_url, 100, 100, 300, 300)
+
+# Display the cropped image (optional)
+cropped_image.show()
